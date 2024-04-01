@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cc48thshyqsre"]
+
+[ext_resource type="Script" path="res://scripts/player_head_bobbing.gd" id="1_fvgos"]
+
+[node name="PlayerHeadBobbing" type="Node"]
+script = ExtResource("1_fvgos")

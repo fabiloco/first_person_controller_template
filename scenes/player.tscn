@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://xv2wflkfrrg2"]
+
+[ext_resource type="Script" path="res://scripts/player_controller.gd" id="1_w3d82"]
+[ext_resource type="PackedScene" uid="uid://cc48thshyqsre" path="res://scenes/player_head_bobbing.tscn" id="2_yt1vp"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1dqan"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ilhdw"]
+height = 1.2
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_w3d82")
+
+[node name="PlayerHeadBobbing" parent="." node_paths=PackedStringArray("player", "eyes") instance=ExtResource("2_yt1vp")]
+player = NodePath("..")
+eyes = NodePath("../Head/Eyes")
+
+[node name="CrouchRayCast" type="RayCast3D" parent="."]
+target_position = Vector3(0, 2, 0)
+
+[node name="StandingCollisionShape" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_1dqan")
+
+[node name="CrouchingCollisionShape" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+shape = SubResource("CapsuleShape3D_ilhdw")
+disabled = true
+
+[node name="Head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
+
+[node name="Eyes" type="Node3D" parent="Head"]
+
+[node name="Camera3D" type="Camera3D" parent="Head/Eyes"]
